@@ -10,30 +10,73 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
+## GaugeChart
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This Flutter package provides a customizable circular, gauge-style pie chart that can be displayed as a full circle or half circle. It's perfect for visualizing data distribution, progress indicators, and more, offering a rich set of features for tailoring your chart to your specific needs.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Full or half circle display option
+- Adjustable gap between slices for better visual separation
+- Customizable start angle to control the starting position of the chart
+- Text on slices or in the middle of the chart for displaying data labels
+- Customizable colors, stroke width, and text labels
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the package to your `pubspec.yaml` dependencies:
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  gauge_chart: ^version
 ```
 
-## Additional information
+or simply run the command in your terminal at project root directory
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```
+flutter pub add gauge_chart
+```
+
+Import the package in your Flutter code:
+
+```dart
+import 'package:gauge_chart/gauge_chart.dart';
+```
+
+## Use the GaugeChart widget with the desired features:
+
+```dart
+GaugeChart(
+    children: [
+        PieData(
+        value: 10,
+        color: Colors.blue.shade800,
+        description: "Taken",
+        ),
+        PieData(
+        value: 4,
+        color: Colors.blue.shade300,
+        description: "Planned",
+        ),
+        PieData(
+        value: 14,
+        color: Colors.grey.shade300,
+        description: "To plan",
+        ),
+    ],
+    gap: 3.5,
+    animateDuration: const Duration(seconds: 1),
+    start: 180,
+    displayIndex: 2,
+    shouldAnimate: true,
+    animateFromEnd: false,
+    isHalfChart: true,
+    size: 200,
+    showValue: false,
+    borderWidth: 25,
+),
+```
+
+## License
+
+This package is available under the **MIT License**.
