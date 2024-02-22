@@ -2,6 +2,10 @@ name: gauge_chart
 description: Simple and animated gauge style (half) pie charts
 version: 1.0.0
 homepage: https://github.com/gheomg/gauge_chart.git
+platforms:
+  android:
+  ios:
+  web:
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
