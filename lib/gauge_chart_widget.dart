@@ -1,5 +1,10 @@
 part of 'gauge_chart.dart';
 
+/// This class represents a gauge chart widget that can be customized
+/// with various styling options, animation settings, and interactive behavior.
+
+/// It accepts a list of [PieData] objects representing the slices of the chart,
+/// and provides options to control the appearance, animation, and interactivity.
 class GaugeChart extends StatelessWidget {
   final List<PieData> children;
   final TextStyle? style;
@@ -19,6 +24,26 @@ class GaugeChart extends StatelessWidget {
   final bool? isHalfChart;
 
   final void Function(int index)? onTap;
+
+  /// Creates a gauge chart widget.
+  ///
+  /// * `children`: A list of [PieData] objects representing the slices of the chart.
+  /// * `showValue`: Whether to display the value of each slice on the chart.
+  /// * `start`: The starting angle for the first pie slice.
+  /// * `gap`: The gap between pie slices.
+  /// * `borderWidth`: The width of the border for each pie slice.
+  /// * `borderEdge`: The style of the border edge for each pie slice.
+  /// * `shouldAnimate`: Whether to animate the chart drawing.
+  /// * `animateDuration`: The duration of the animation, if enabled.
+  /// * `displayIndex`: The index of the pie slice to highlight, if any.
+  /// * `child`: An optional child widget to place at the center of the chart.
+  /// * `style`: The text style to use for displaying pie values.
+  /// * `centerTopStyle`: The text style to use for the top text at the center of the chart.
+  /// * `centerBottomStyle`: The text style to use for the bottom text at the center of the chart.
+  /// * `animateFromEnd`: Whether to animate the chart from the end to the beginning.
+  /// * `onTap`: A callback function triggered when a pie slice is tapped.
+  /// * `size`: The size of the chart.
+  /// * `isHalfChart`: Whether to display a half chart instead of a full circle.
   const GaugeChart({
     super.key,
     required this.children,

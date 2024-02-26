@@ -1,5 +1,7 @@
 part of 'gauge_chart.dart';
 
+/// Takes a list of PieData objects, a gap value, and a isHalfPie flag.
+/// It returns a list of doubles representing the values to be used for drawing the gauge chart.
 List<double> getValues(List<PieData> pies, double gap, bool isHalfPie) {
   final List<double> pieValues = [];
   for (var i = 0; i < pies.length; i++) {
@@ -13,12 +15,14 @@ List<double> getValues(List<PieData> pies, double gap, bool isHalfPie) {
   return pieValues;
 }
 
+/// Takes the x-coordinate, y-coordinate, and size of a tap on the chart and calculates the corresponding angle in degrees.
 double getAngleFromCordinates(
     double xCordinate, double yCordinate, double size) {
   return getPositiveAngle(
       atan2(yCordinate - size, xCordinate - size) * 180 / pi);
 }
 
+/// Converts a negative tap angle to a positive angle between 0 and 360 degrees.
 double getPositiveAngle(double tapAngle) {
   if (tapAngle > -180 && tapAngle < 0) {
     tapAngle = 180 + (180 + tapAngle);
@@ -26,6 +30,7 @@ double getPositiveAngle(double tapAngle) {
   return tapAngle;
 }
 
+/// Ensures the start angle is within the range of 0 to 360 degrees.
 double getAngleIn360(double startAngle) {
   if (startAngle < 0) {
     startAngle = startAngle % 360;
@@ -35,6 +40,7 @@ double getAngleIn360(double startAngle) {
   return startAngle;
 }
 
+/// Checks if a tap falls within the arc of a specific pie slice.
 bool isCurrentPieTap(double startAngle, double sweepAngle, double tapAngle) {
   if (startAngle <= sweepAngle) {
     if (startAngle <= tapAngle && tapAngle <= sweepAngle) {
@@ -48,6 +54,7 @@ bool isCurrentPieTap(double startAngle, double sweepAngle, double tapAngle) {
   return false;
 }
 
+/// Identifies the index of the pie slice that was tapped based on the tap location.
 int? getIndexOfTappedPie(
     List<double> pieValues, double total, double gap, startAngle, tapAngle) {
   for (int i = 0; i < pieValues.length; i++) {

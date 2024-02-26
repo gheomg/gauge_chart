@@ -1,5 +1,7 @@
 part of 'gauge_chart.dart';
 
+/// This class handles the visual rendering of the gauge chart,
+/// drawing the pie slices, values, and center text based on the provided configuration.
 class _GaugeChartPainter extends CustomPainter {
   final List<double> pieValues;
   final bool showValue;
@@ -16,10 +18,25 @@ class _GaugeChartPainter extends CustomPainter {
   final bool animateFromEnd;
   final bool? isHalfChart;
 
+  /// Parameters:
+  /// * `pieValues`: A list of values representing the size of each pie slice.
+  /// * `showValue`: Whether to display the value of each pie slice on the chart.
+  /// * `pies`: A list of [PieData] objects representing the slices of the chart.
+  /// * `total`: The total value of all pie slices combined.
+  /// * `gap`: The gap between pie slices.
+  /// * `startAngle`: The starting angle for the first pie slice (in degrees).
+  /// * `borderEdge`: The style of the border edge for each pie slice.
+  /// * `borderWidth`: The width of the border for each pie slice.
+  /// * `animateFromEnd`: Whether to animate the chart from the end to the beginning.
+  /// * `displayIndex`: The index of the pie slice to highlight, if any.
+  /// * `style`: The text style to use for displaying pie values.
+  /// * `centerTopStyle`: The text style to use for the top text at the center of the chart.
+  /// * `centerBottomStyle`: The text style to use for the bottom text at the center of the chart.
+  /// * `isHalfChart`: Whether to display a half chart instead of a full circle.
   _GaugeChartPainter({
     required this.pieValues,
-    required this.pies,
     required this.showValue,
+    required this.pies,
     required this.total,
     required this.gap,
     required this.startAngle,
@@ -71,6 +88,12 @@ class _GaugeChartPainter extends CustomPainter {
     return true;
   }
 
+  /// This method draws a pie arc with the specified color and size on the given canvas.
+
+  /// Parameters:
+  /// * `pieColor`: The color of the pie arc.
+  /// * `size`: The size of the pie arc.
+  /// * `canvas`: The canvas on which to draw the arc.
   void drawPieArc(Color pieColor, Size size, Canvas canvas) {
     final radius = size.width / 2;
     final rect = Rect.fromCircle(
@@ -91,6 +114,13 @@ class _GaugeChartPainter extends CustomPainter {
     );
   }
 
+  /// This method draws the given pie value as text at a position aligned with the corresponding pie slice.
+
+  /// Parameters:
+  /// * `pieValue`: The value of the pie slice to be displayed as text.
+  /// * `radius`: The radius of the pie chart.
+  /// * `size`: The size of the canvas on which to draw the text.
+  /// * `canvas`: The canvas on which to draw the text.
   void showPieText(double pieValue, double radius, Size size, Canvas canvas) {
     final textAngle = startAngle + (sweepRadian) / 2;
 
@@ -115,10 +145,16 @@ class _GaugeChartPainter extends CustomPainter {
         Offset(textX - textPainter.width / 2, textY - textPainter.height / 2));
   }
 
+  /// This method increments the `startAngle` property by the current `sweepRadian`, preparing for drawing the next pie slice.
   updateStartAngle() {
     startAngle += sweepRadian;
   }
 
+  /// This method draws the value and description of the currently displayed pie slice at the center of the chart.
+
+  /// Parameters:
+  /// * `canvas`: The canvas on which to draw the text.
+  /// * `size`: The size of the canvas.
   drawCenterText(Canvas canvas, Size size) {
     final textSpan = TextSpan(
       children: [
