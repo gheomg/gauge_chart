@@ -45,7 +45,7 @@ class GaugeChart extends StatelessWidget {
   /// * `size`: The size of the chart.
   /// * `isHalfChart`: Whether to display a half chart instead of a full circle.
   const GaugeChart({
-    super.key,
+    Key? key,
     required this.children,
     this.showValue = true,
     this.start = -90,
@@ -63,7 +63,7 @@ class GaugeChart extends StatelessWidget {
     this.onTap,
     this.size = 200,
     this.isHalfChart,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
