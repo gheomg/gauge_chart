@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Downgraded the minimum SDK version
+
 ## 1.0.1
 
 * Added dartdoc comments
