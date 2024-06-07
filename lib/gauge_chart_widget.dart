@@ -22,6 +22,7 @@ class GaugeChart extends StatelessWidget {
   final Duration? animateDuration;
   final bool animateFromEnd;
   final bool? isHalfChart;
+  final List<String>? centerText;
 
   final void Function(int index)? onTap;
 
@@ -44,6 +45,7 @@ class GaugeChart extends StatelessWidget {
   /// * `onTap`: A callback function triggered when a pie slice is tapped.
   /// * `size`: The size of the chart.
   /// * `isHalfChart`: Whether to display a half chart instead of a full circle.
+  /// * `centerText`: The test that is displayed in the center of the chart.
   const GaugeChart({
     Key? key,
     required this.children,
@@ -63,6 +65,7 @@ class GaugeChart extends StatelessWidget {
     this.onTap,
     this.size = 200,
     this.isHalfChart,
+    this.centerText,
   }) : super(key: key);
 
   @override
@@ -116,6 +119,7 @@ class GaugeChart extends StatelessWidget {
             borderEdge: borderEdge,
             borderWidth: borderWidth,
             isHalfChart: isHalfChart,
+            centerText: centerText,
           ),
           child: child,
         ),

@@ -17,6 +17,7 @@ class _GaugeChartPainter extends CustomPainter {
   final double borderWidth;
   final bool animateFromEnd;
   final bool? isHalfChart;
+  final List<String>? centerText;
 
   /// Parameters:
   /// * `pieValues`: A list of values representing the size of each pie slice.
@@ -33,6 +34,7 @@ class _GaugeChartPainter extends CustomPainter {
   /// * `centerTopStyle`: The text style to use for the top text at the center of the chart.
   /// * `centerBottomStyle`: The text style to use for the bottom text at the center of the chart.
   /// * `isHalfChart`: Whether to display a half chart instead of a full circle.
+  /// * `centerText`: The test that is displayed in the center of the chart.
   _GaugeChartPainter({
     required this.pieValues,
     required this.showValue,
@@ -48,6 +50,7 @@ class _GaugeChartPainter extends CustomPainter {
     this.centerTopStyle,
     this.centerBottomStyle,
     this.isHalfChart,
+    this.centerText,
   });
 
   late double sweepRadian;
@@ -78,9 +81,7 @@ class _GaugeChartPainter extends CustomPainter {
 
       updateStartAngle();
     }
-    if (displayIndex != null && displayIndex! < pies.length) {
-      drawCenterText(canvas, size);
-    }
+    drawCenterText(canvas, size);
   }
 
   @override
@@ -156,10 +157,21 @@ class _GaugeChartPainter extends CustomPainter {
   /// * `canvas`: The canvas on which to draw the text.
   /// * `size`: The size of the canvas.
   drawCenterText(Canvas canvas, Size size) {
+    String centerTop = '';
+    String centerBottom = '';
+
+    if (centerText != null) {
+      if (centerText!.isNotEmpty) centerTop = centerText!.elementAt(0);
+      if (centerText!.length > 1) centerBottom = centerText!.elementAt(1);
+    } else if (displayIndex != null && displayIndex! < pies.length) {
+      centerTop = '${pies.elementAt(displayIndex!).value}';
+      centerBottom = pies.elementAt(displayIndex!).description;
+    }
+
     final textSpan = TextSpan(
       children: [
         TextSpan(
-          text: '${pies.elementAt(displayIndex!).value}\n',
+          text: '$centerTop\n',
           style: centerTopStyle ??
               const TextStyle(
                 color: Colors.black,
@@ -167,7 +179,7 @@ class _GaugeChartPainter extends CustomPainter {
               ),
         ),
         TextSpan(
-          text: pies.elementAt(displayIndex!).description,
+          text: centerBottom,
           style: centerBottomStyle ??
               const TextStyle(
                 color: Colors.black,
