@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Added 'centerText' parameter
+
 ## 1.0.2
 
 * Downgraded the minimum SDK version
