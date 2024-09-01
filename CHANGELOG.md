@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Added possibility to display a legend
+
 ## 1.0.3
 
 * Added 'centerText' parameter

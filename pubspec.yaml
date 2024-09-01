@@ -1,6 +1,6 @@
 name: gauge_chart
 description: This Flutter package provides a customizable circular, gauge-style pie chart that can be displayed as a full circle or half circle
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/gheomg/gauge_chart.git
 platforms:
   android:
@@ -17,4 +17,4 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^4.0.0

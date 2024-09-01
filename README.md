@@ -2,6 +2,8 @@
 
 This Flutter package provides a customizable circular, gauge-style pie chart that can be displayed as a full circle or half circle. It's perfect for visualizing data distribution, progress indicators, and more, offering a rich set of features for tailoring your chart to your specific needs.
 
+![Example Gauge Chart](images/chart.jpeg)
+
 ## Features
 
 - Full or half circle display option

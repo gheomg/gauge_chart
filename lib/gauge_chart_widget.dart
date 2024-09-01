@@ -23,6 +23,8 @@ class GaugeChart extends StatelessWidget {
   final bool animateFromEnd;
   final bool? isHalfChart;
   final List<String>? centerText;
+  final bool showLegend;
+  final double legendLeftPadding;
 
   final void Function(int index)? onTap;
 
@@ -45,7 +47,9 @@ class GaugeChart extends StatelessWidget {
   /// * `onTap`: A callback function triggered when a pie slice is tapped.
   /// * `size`: The size of the chart.
   /// * `isHalfChart`: Whether to display a half chart instead of a full circle.
-  /// * `centerText`: The test that is displayed in the center of the chart.
+  /// * `centerText`: The text that is displayed in the center of the chart.
+  /// * `showLegend`: Option to display a legend on the right side of the chart.
+  /// * `legendLeftPadding`: The size of the space between the chart and legend.
   const GaugeChart({
     Key? key,
     required this.children,
@@ -66,6 +70,8 @@ class GaugeChart extends StatelessWidget {
     this.size = 200,
     this.isHalfChart,
     this.centerText,
+    this.showLegend = false,
+    this.legendLeftPadding = 40.0,
   }) : super(key: key);
 
   @override
@@ -80,9 +86,55 @@ class GaugeChart extends StatelessWidget {
             tween: Tween(begin: 0.00000000001, end: 1.0),
             duration: animateDuration ?? const Duration(milliseconds: 1500),
             builder: (context, value, _) {
-              return pieChartWidget(pieValues, total, value);
+              return pieChartExtended(pieValues, total, value);
             })
-        : pieChartWidget(pieValues, total, 1);
+        : pieChartExtended(pieValues, total, 1);
+  }
+
+  Widget pieChartExtended(List<double> pieValues, double total, double value) {
+    if (!showLegend) return pieChartWidget(pieValues, total, 1);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        pieChartWidget(pieValues, total, 1),
+        SizedBox(
+          width: legendLeftPadding,
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: children.map(
+              (e) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: e.color,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Text(
+                        e.description,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ).toList(),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget pieChartWidget(List<double> pieValues, double total, double value) {
